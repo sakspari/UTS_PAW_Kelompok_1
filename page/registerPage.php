@@ -48,13 +48,13 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6" style="overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
-                 alt="ConnectUs Illustration"
-                 style="display: block;
-                    max-height: 100%;
-                    width: auto;">
-        </div>
+<!--        <div class="col-6 d-md-block d-sm-none" style="overflow: hidden;">-->
+<!--            <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"-->
+<!--                 alt="ConnectUs Illustration"-->
+<!--                 style="display: block;-->
+<!--                    max-height: 100%;-->
+<!--                    width: auto;">-->
+<!--        </div>-->
         <!-- Form for User Register -->
         <div class="col-6">
             <div class="container min-vh-100 d-flex align-items-center justify-content-center">
@@ -73,8 +73,8 @@
                                 <label for="gender" class="col-2 form-label">Gender</label>
                                 <select class="col form-control form-select" id="gender" name="gender">
                                     <option selected>Select a Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
                                 </select>
                             </div>
                             <div class="mb-3 row">
@@ -87,10 +87,14 @@
                                        aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3 row">
+                                <label for="username" class="col-2 form-label">Username</label>
+                                <input type="text" class="col form-control" id="email" name="username"
+                                       aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 row">
                                 <label for="exampleInputPassword" class="col-2 form-label">Password</label>
                                 <input type="password" class="col form-control" id="password" name="password">
                             </div>
-
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary" name="register">Connect Us Now</button>
                             </div>

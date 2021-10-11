@@ -1,8 +1,8 @@
 <?php
-    $host = "%%HIDDEN%%";
-    $user = "%%HIDDEN%%";
-    $pass = "%%HIDDEN%%";
-    $name = "uts_web";
+$host = "sg.1-cluster-ap.luckynetwork.id";
+$user = "praktikum5";
+$pass = "@newS3cur3P44sw0rd0115";
+$name = "uts_web";
 
     $con = mysqli_connect($host,$user,$pass,$name);
 

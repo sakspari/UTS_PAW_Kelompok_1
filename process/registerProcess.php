@@ -6,12 +6,13 @@ if (isset($_POST['register'])) {
     $gender = $_POST['gender'];
     $dateborn = $_POST['dateborn'];
     $email = $_POST['email'];
+    $username=$_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     // Melakukan insert ke databse dengan query dibawah ini
     $query = mysqli_query($con,
-        "INSERT INTO users(name, gender, dateborn, email, password)
+        "INSERT INTO users(name, gender, dateborn, email, username, password)
  VALUES
- ('$name', '$gender', '$dateborn', '$email', '$password')")
+ ('$name', '$gender', '$dateborn', '$email', '$username', '$password')")
     or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
 
     if ($query) {
