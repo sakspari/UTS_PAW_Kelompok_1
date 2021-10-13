@@ -1,8 +1,8 @@
 <?php
-$host = "sg.1-cluster-ap.luckynetwork.id";
-$user = "praktikum5";
-$pass = "@newS3cur3P44sw0rd0115";
-$name = "uts_web";
+    $host = "sg.1-cluster-ap.luckynetwork.id";
+    $user = "praktikum5";
+    $pass = "@newS3cur3P44sw0rd0115";
+    $name = "uts_web";
 
     $con = mysqli_connect($host,$user,$pass,$name);
 
@@ -13,16 +13,31 @@ $name = "uts_web";
 
     function getUsername($con, $id)
     {
-        $query1 = mysqli_query($con, "SELECT `username_user` FROM users WHERE id_user='$id'") or die(mysqli_error($con));
+        $query1 = mysqli_query($con, "SELECT `username` FROM user_test WHERE id='$id'") or die(mysqli_error($con));
             if (mysqli_num_rows($query1) == 0) {
                 return "No Username";
             }
             else
             {
                 while($data1 = mysqli_fetch_assoc($query1)){
-                    return $data1['username_user'];
+                    return $data1['username'];
                 }
             }
+    }
+
+    //$_SESSION["userName"]
+    function getId($con, $username)
+    {
+        $query1 = mysqli_query($con, "SELECT `id` FROM user_test WHERE username='$username'") or die(mysqli_error($con));
+        if (mysqli_num_rows($query1) == 0) {
+            return "No Username";
+        }
+        else
+        {
+            while($data1 = mysqli_fetch_assoc($query1)){
+                return $data1['username'];
+            }
+        }
     }
 
 ?>

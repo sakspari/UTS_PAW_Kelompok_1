@@ -4,6 +4,8 @@
 
 <?php
 
+    $user_id = $_SESSION['userId'];
+    
     function getImagePath($id)
     {
         if(file_exists('./images/profile/'.$id.'.jpg')) {
@@ -167,7 +169,7 @@
               </li> -->
 
                 <?php
-                    $query1 = mysqli_query($con, "SELECT * FROM followers WHERE user_id_1 = 1") or die(mysqli_error($con));
+                    $query1 = mysqli_query($con, "SELECT * FROM followers WHERE user_id_1 = $user_id") or die(mysqli_error($con));
                     if (mysqli_num_rows($query1) == 0) {
                         echo 'You currently not follow anyone';
                     }
