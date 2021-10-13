@@ -4,7 +4,7 @@ if (isset($_POST['login'])) {
     include('../db.php');
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $query = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'") or die(mysqli_error($con));
+    $query = mysqli_query($con, "SELECT * FROM user_test WHERE username = '$username'") or die(mysqli_error($con));
     if (mysqli_num_rows($query) == 0) {
         echo
         '<script>
