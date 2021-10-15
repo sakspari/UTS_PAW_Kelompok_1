@@ -16,6 +16,14 @@ if (isset($_POST["register"])) {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo
+        '<script>
+         alert("Email invalid"); window.location = "../page/registerPage.php"
+         </script>';
+    }
+
+    // verify email and username
 
     //Instantiation and passing `true` enables exceptions
     $mail = new PHPMailer(true);
@@ -62,36 +70,25 @@ if (isset($_POST["register"])) {
         $mail->send();
         // echo 'Message has been sent';
 
-//        $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // connect with database
-//        $conn = mysqli_connect("localhost:8889", "root", "root", "test");
-
-        // insert in users table
-//        $sql = "INSERT INTO user_test(name, gender, dateborn, email, username, password, verification_code, verify_at) VALUES (' $name ', ' $gender',' $dateborn ',' $email', ' $username ',' $password ', ' $verification_code ', NULL)";
-//        mysqli_query($con, $sql);
-
 //        ---------------------------------------
         $query = mysqli_query($con,
             "INSERT INTO user_test(name, gender, dateborn, email, username, password, verification_code, verify_at)
              VALUES
              (' $name ', ' $gender',' $dateborn ',' $email', ' $username ',' $password ', ' $verification_code ', NULL)")
-                    or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
+        or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
 
-                    if ($query) {
-                        echo
-                        '<script>
+        if ($query) {
+            echo
+            '<script>
              alert("Register Success"); window.location = "../page/registerPage.php"
              </script>';
-                    } else {
-                        echo
-                        '<script>
+        } else {
+            echo
+            '<script>
              alert("Register Failed");
              </script>';
-                    }
+        }
 
-
-//        ---------------------------------------
 
         header("Location: ../page/email-verification.php?email=" . $email);
         exit();

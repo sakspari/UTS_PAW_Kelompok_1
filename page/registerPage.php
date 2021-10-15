@@ -18,36 +18,47 @@ use PHPMailer\PHPMailer\Exception;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
 
+    <script>
+        // form login-register validation
+        const
+    </script>
+
     <title>Login Page</title>
 </head>
 
-<body style="height: 100vh;">
+<body style="height: 100vh; background-color: #ffd77d">
 <!-- Navbar Component with Login Form -->
-<div class="navbar navbar-light d-flex flex-row" style="background-color: #ffc43d">
-    <div class="ms-4">
-        <a class="navbar-brand" href="#">
+<div style="background-color: #ffc43d">
+    <div class="navbar navbar-expand-lg navbar-light w-75 mx-auto">
+        <a class="navbar-brand ms-5" href="#">
             <span class="fs-1 fw-bolder">ConnectUs</span>
         </a>
-    </div>
-    <div class="me-4">
-        <form action="../process/loginProcess.php" method="post" class="d-flex flex-row">
-            <div class="mb-3">
-                <label for="exampleInputEmail" class="form-label fw-bold">Username</label>
-                <input class="form-control" id="username" name="username" aria-describedby="emailHelp"/>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar nav d-flex flex-sm-column justify-content-center ms-auto me-lg-5">
+                <form action="../process/loginProcess.php" method="post"
+                      class="d-flex flex-lg-row flex-sm-column flex-md-column">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label fw-bold">Username</label>
+                        <input class="form-control" id="username" name="username" aria-describedby="emailHelp" required/>
+                    </div>
+                    <div class="mb-3 ms-lg-2">
+                        <label for="exampleInputPassword" class="form-label fw-bold">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required/>
+                    </div>
+                    <div class="ms-lg-2 mx-auto my-md-auto">
+                        <button type="submit"
+                                class="btn btn-primary btn-large fw-bold mt-3"
+                                name="login">
+                            Login
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3 ms-2">
-                <label for="exampleInputPassword" class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" id="password" name="password"/>
-            </div>
-            <div class="ms-2">
-                <button type="submit"
-                        class="btn btn-primary btn-large fw-bold"
-                        style="margin-top: 2rem"
-                        name="login">
-                    Login
-                </button>
-            </div>
-        </form>
+        </div>
+        <!--    </div>-->
     </div>
 </div>
 <!-- End Of Navbar Component -->
@@ -55,60 +66,55 @@ use PHPMailer\PHPMailer\Exception;
 <!-- Content of Register Page -->
 
 <div class="container-fluid">
-    <div class="row">
-        <!--        <div class="col-6 d-md-block d-sm-none" style="overflow: hidden;">-->
-        <!--            <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"-->
-        <!--                 alt="ConnectUs Illustration"-->
-        <!--                 style="display: block;-->
-        <!--                    max-height: 100%;-->
-        <!--                    width: auto;">-->
-        <!--        </div>-->
-        <!-- Form for User Register -->
-        <div class="col-6">
-            <div class="container min-vh-100 d-flex align-items-center justify-content-center">
-                <div class="card text-dark bg-light ma-5 shadow" style="min-width: 45rem;">
-                    <!-- <div class="card-header fw-bold">Login</div> -->
-                    <div class="card-body" style="margin: 2rem 3rem;">
+    <div class="row h-100">
+        <div class="col-sm-12 my-auto">
+            <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+                <div class="card w-auto container-fluid text-dark bg-light ma-5 shadow w-50">
+                    <div class="card-body mx-md-5 mx-sm-0 my-5">
                         <div>
                             <h1>Join and let it ConnectUs!</h1>
                         </div>
                         <form action="../process/verifyEmail.php" method="post">
                             <div class="mb-3 row">
-                                <label for="Name" class="col-2 form-label">Name</label>
-                                <input type="text" class="col form-control" id="name" name="name">
+                                <label for="Name" class=" col-lg-3 form-label">Name</label>
+                                <input type="text" class="col-md col-sm-auto form-control" id="name" name="name" required>
                             </div>
                             <div class="mb-3 row">
-                                <label for="gender" class="col-2 form-label">Gender</label>
-                                <select class="col form-control form-select" id="gender" name="gender">
-                                    <option selected>Select a Gender</option>
+                                <label for="gender" class="col-lg-3 form-label">Gender</label>
+                                <select class="col-md col-sm-auto form-control form-select" id="gender" name="gender" aria-required="true">
+                                    <option selected aria-invalid="true">Select a Gender</option>
                                     <option value="1">Male</option>
                                     <option value="0">Female</option>
                                 </select>
+                                <div class="invalid-feedback text-danger">
+                                    invalid State
+                                </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="dateborn" class="col-2 form-label">Date Born</label>
-                                <input type="date" class="col form-control" id="dateborn" name="dateborn">
+                                <label for="dateborn" class="col-lg-3 form-label">Date Born</label>
+                                <input type="date" class="col-md col-sm-auto form-control" id="dateborn"
+                                       name="dateborn" required>
                             </div>
                             <div class="mb-3 row">
-                                <label for="email" class="col-2 form-label">Email</label>
-                                <input type="text" class="col form-control" id="email" name="email"
-                                       aria-describedby="emailHelp">
+                                <label for="email" class="col-lg-3 form-label">Email</label>
+                                <input type="text" class="col-md col-sm-auto form-control" id="email" name="email"
+                                       aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3 row">
-                                <label for="username" class="col-2 form-label">Username</label>
-                                <input type="text" class="col form-control" id="email" name="username"
-                                       aria-describedby="emailHelp">
+                                <label for="username" class="col-lg-3 form-label">Username</label>
+                                <input type="text" class="col-md col-sm-auto form-control" id="email" name="username"
+                                       aria-describedby="emailHelp" required>
                             </div>
                             <div class="mb-3 row">
-                                <label for="exampleInputPassword" class="col-2 form-label">Password</label>
-                                <input type="password" class="col form-control" id="password" name="password">
+                                <label for="exampleInputPassword" class="col-lg-3 form-label">Password</label>
+                                <input type="password" class="col-md col-sm-auto form-control" id="password"
+                                       name="password" required>
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary" name="register">Connect Us Now</button>
                             </div>
                         </form>
                     </div>
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
