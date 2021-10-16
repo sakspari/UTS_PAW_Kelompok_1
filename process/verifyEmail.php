@@ -18,6 +18,13 @@ if (isset($_POST["register"])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $inputVerifyStatus = true;
 
+    if($gender != 1 || $gender != 0){
+        echo
+        '<script>
+         alert("Silahkan memilih gender!"); window.location = "../page/registerPage.php"
+         </script>';
+    }
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $inputVerifyStatus = false;
         echo
