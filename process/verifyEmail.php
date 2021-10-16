@@ -99,7 +99,7 @@ if (isset($_POST["register"])) {
             $query = mysqli_query($con,
                 "INSERT INTO user_test(name, gender, dateborn, email, username, password, verification_code, verify_at)
              VALUES
-             (' $name ', ' $gender',' $dateborn ',' $email', ' $username ',' $password ', ' $verification_code ', NULL)")
+             ('$name', '$gender','$dateborn','$email', '$username','$password', '$verification_code', NULL)")
             or die(mysqli_error($con)); // perintah mysql yang gagal dijalankan ditangani oleh perintah “or die”
 
             if ($query) {

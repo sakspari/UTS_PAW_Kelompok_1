@@ -4,6 +4,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -17,51 +19,6 @@ use PHPMailer\PHPMailer\Exception;
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
-
-    <script>
-        const reSpaces = /^\S*$/;
-
-        function validateUsername() {
-            const username = document.querySelector('#username');
-            if (reSpaces.test(username.value)) {
-                username.classList.remove('is-invalid');
-                username.classList.add('is-valid');
-            } else {
-                username.classList.remove('is-valid');
-                username.classList.add('is-invalid');
-            }
-        }
-
-        function validateEmail() {
-            const email = document.querySelector('#email');
-            const re = /^([a-zA-Z0-9_\-?\.?]){3,}@([a-zA-Z]){3,}\.([a-zA-Z]){2,5}$/;
-
-            if (reSpaces.test(email.value) && re.test(email.value)) {
-                email.classList.remove('is-invalid');
-                email.classList.add('is-valid');
-
-            } else {
-                email.classList.add('is-invalid');
-                email.classList.remove('is-valid');
-
-            }
-        }
-
-        function validatePassword() {
-            const password = document.querySelector('#password');
-            const re = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})(?=.*[!@#$%^&*])/;
-            if (re.test(password.value) && reSpaces.test(password.value)) {
-                password.classList.remove('is-invalid');
-                password.classList.add('is-valid');
-
-            } else {
-                password.classList.add('is-invalid');
-                password.classList.remove('is-valid');
-
-            }
-        }
-
-    </script>
     
     <title>Login Page</title>
 </head>
