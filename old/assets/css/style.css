@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Carattere&display=swap");
+
+.font-Akronim {
+  font-family: "Carattere", cursive;
+  font-size: 3rem;
+  font-weight: 590;
+}
+
+.followed {
+  background: #fff;
+  padding: 16px;
+  display: flex;
+}
+
+.followed img {
+  border: 1px solid black;
+}
+
+.followed a.publisher-name {
+  margin-left: 2px;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 20px;
+  /* vertical-align: middle; */
+  text-align: center;
+  vertical-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+a.publisher-name {
+  margin: 0;
+}
+
+.post-location {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 596px) {
+  .container-fluid {
+    padding-bottom: 30px;
+  }
+  main {
+    padding-top: 70px;
+  }
+}
