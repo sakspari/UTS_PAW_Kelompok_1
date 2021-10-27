@@ -58,7 +58,7 @@
             //Untuk mencegah username discovery, pesan invalid username dan password harus sama
             echo '<script>
                 alert("Username atau Password salah");
-                window.location = "../public/welcome.php";
+                window.location = "./welcome.php";
             </script>';
             return;
         }
@@ -67,7 +67,7 @@
         if ($user['verify_at'] != null)
         {
             echo '<script>
-                window.location = "../public/welcome.php";
+                window.location = "./welcome.php";
             </script>';
             return;
         }
@@ -77,7 +77,7 @@
             echo '
                 <script>
                     alert("Terjadi Kesalahan. Harap hubungi support@connectus.id");
-                    window.location = "../public/welcome.php";
+                    window.location = "./welcome.php";
                 </script>';
             return;
         }
@@ -87,7 +87,7 @@
             echo '
                 <script>
                     alert("Kode yang dimasukan salah!");
-                    window.location = "../public/verify.php";
+                    window.location = "./verify.php";
                 </script>';
             return;
         }
@@ -113,7 +113,7 @@
         $sql = "UPDATE user_test SET verify_at = NOW() WHERE id = '$id'";
         $result  = mysqli_query($con, $sql);
 
-        header('Location: https://localhost/public/index.php');
+        header('Location: index.php');
         return;
 
     }

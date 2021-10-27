@@ -42,8 +42,8 @@
 
     function getImagePath($id)
     {
-        if(file_exists('./images/profile/'.$id.'.jpg')) {
-            return "./images/profile/$id.jpg";
+        if(file_exists('../images/profile/'.$id.'.jpg')) {
+            return "../images/profile/$id.jpg";
         }
         else
         {
@@ -62,6 +62,79 @@
         {
             return $default;
         }
+    }
+
+
+    function isFollowed($user_id_1, $user_id_2)
+    {
+	//echo 'ab';
+        $con = connect();
+        $query1 = mysqli_query($con, "SELECT * FROM followers WHERE user_id_1 = $user_id_1 AND user_id_2 = $user_id_2") or die(mysqli_error($con));
+        $con->close();
+        if (mysqli_num_rows($query1) == 0) {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+    function addFollower($user_id_1, $user_id_2)
+    {
+	//echo 'a.2';
+        if (isFollowed($user_id_1, $user_id_2))
+        {
+            return;
+        }
+        $con = connect();
+        $query = mysqli_query($con, "INSERT INTO followers(user_id_1, user_id_2) VALUES ('$user_id_1', '$user_id_2')") or die(mysqli_error($con));        
+        if (!$query)
+        {
+            echo '
+                <script>
+                    alert("Add follower gagal, coba lagi");
+                    window.location = "./profile.php?id='.$user_id_2.'";
+                </script>
+                ';
+            return;
+        }
+        $con->close();
+        echo '
+                <script>
+                    window.location = "./profile.php?id='.$user_id_2.'";
+                </script>';
+        return;
+    }
+
+    function removeFollower($user_id_1, $user_id_2)
+    {
+	//echo 'b.2';
+        if (!isFollowed($user_id_1, $user_id_2))
+        {
+            return;
+        }
+        //DELETE FROM `uts_web`.`followers` WHERE (`id_followersrelationship` = '1');
+        $con = connect();
+        $query = mysqli_query($con, "DELETE FROM followers WHERE user_id_1 = $user_id_1 AND user_id_2 = $user_id_2") or die(mysqli_error($con));        
+        if (!$query)
+        {
+            echo '
+                <script>
+                    alert("Remove follower gagal, coba lagi");
+                    window.location = "./profile.php?id='.$user_id_2.'";
+                </script>
+                ';
+            return;
+        }
+        $con->close();
+        echo '
+        <script>
+            window.location = "./profile.php?id='.$user_id_2.'";
+        </script>';
+return;
+
     }
 
 ?>

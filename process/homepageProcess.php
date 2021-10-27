@@ -11,7 +11,7 @@
     {
         $con = connect();
         $query1 = mysqli_query($con, "SELECT * FROM followers WHERE user_id_1 = $id") or die(mysqli_error($con));
-
+        $con->close();
         if (mysqli_num_rows($query1) == 0) {
             return '0';
         }
@@ -89,7 +89,7 @@
                         <div class="card-body">
                             <div class="followed">
                                 <img src="'.getImagePath($data1['id_user']).'" width="50" height="50" class="me-3 rounded-circle" />
-                                <a href="./profile?id='.$data1['id_user'].'" class="publisher-name">'.getUsername($data1['id_user']).'</a>
+                                <a href="profile.php?id='.$data1['id_user'].'" class="publisher-name">'.getName($data1['id_user']).'</a>
                             </div>
                             '.$data1['post_content'].'
                             </div>
@@ -120,7 +120,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark fw-bold" href="./profile.php?id='.$data1['user_id_2'].'">
                             <img src="'.getImagePath($data1['user_id_2']).'" width="50" height="50" class="me-1 rounded-circle" />
-                            '.getUsername($data1['user_id_2']).'
+                            '.getName($data1['user_id_2']).'
                         </a>
                     </li> 
                     ';
@@ -136,15 +136,15 @@
         if (mysqli_num_rows($query1) == 0) {
             echo '
                 <script>
-                    alert("Pengguna tidak ditemukan :<");
-                    window.location = "../public/homepage.php";
+                    alert("Pengguna tidak ditemukan :< \n Berikut beberapa tips untuk mencari user: \n 1. Masukan Username pengguna, bukan Nama \n 2. Cek kembali username yang dimasukan");
+                    window.location = "./homepage.php";
                 </script>';
             return;
         }
 
         $data1 = mysqli_fetch_assoc($query1);
         //var_dump($data1);
-        header("Location: https://localhost/public/profile.php?id=".$data1['id']);
+        header("Location: ./profile.php?id=".$data1['id']);
         return;
     }
 

@@ -19,7 +19,7 @@
             //Untuk mencegah username discovery, pesan invalid username dan password harus sama
             echo '<script>
                 alert("Username atau Password salah");
-                window.location = "../public/welcome.php";
+                window.location = "./welcome.php";
             </script>';
             return;
         }
@@ -30,7 +30,7 @@
             echo '
                 <script>
                     alert("Username atau Password salah");
-                    window.location = "../public/welcome.php";
+                    window.location = "./welcome.php";
                 </script>';
             return;
         }
@@ -39,7 +39,7 @@
         {
             $_SESSION['email'] = $user['email'];
             $_SESSION['half-logged'] = $user['id'];
-            header('Location: http://localhost/public/verify.php');
+            header('Location: verify.php');
             return;
         }
 
@@ -58,9 +58,23 @@
         //Kebanyakan fungsi backend mengunakan ID
         $_SESSION['id'] = $user['id'];
 
-        header('Location: https://localhost/public/index.php');
+        header('Location: index.php');
         return;
 
+    }
+
+    function logout()
+    {
+        //Graceful session engine shutdown
+        $_SESSION['isLogin'] = false;
+        $_SESSION['user'] = null;
+        $_SESSION['half-logged'] = null;
+        $_SESSION['id'] = null;
+        $_SESSION['email'] = null;
+        session_destroy();
+
+        header('Location: index.php');
+        return;
     }
 
 ?>

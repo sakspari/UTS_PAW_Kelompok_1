@@ -9,22 +9,22 @@
             echo '
                 <script>
                     alert("Terjadi kesalahan keamanan");
-                    window.location = "../public/index.php";
+                    window.location = "./index.php";
                 </script>';
             return;
         } 
 
-        if (!isset($name))
+        if (empty($name))
         {
             echo '
                 <script>
                     alert("Nama harus memiliki isi");
-                    window.location = "../public/profile.php";
+                    window.location = "./profile.php";
                 </script>';
             return;
         }
 
-        if (isset($gender))
+        if (!empty($gender))
         {
             if ($gender == "Pria") { $gender = 1; }
             if ($gender == "Wanita") { $gender = 0; }
@@ -34,27 +34,27 @@
             echo '
                 <script>
                     alert("Gender harus dipilih");
-                    window.location = "../public/profile.php";
+                    window.location = "./profile.php";
                 </script>';
             return;
         }
 
-        if (!isset($borndate))
+        if (empty($borndate))
         {
             echo '
                 <script>
                     alert("Tanggal lahir harus diisi");
-                    window.location = "../public/profile.php";
+                    window.location = "./profile.php";
                 </script>';
             return;
         }
 
-        if (!isset($email))
+        if (empty($email))
         {
             echo '
                 <script>
                     alert("Email harus diisi");
-                    window.location = "../public/profile.php";
+                    window.location = "./profile.php";
                 </script>';
             return;
         }
@@ -82,8 +82,7 @@
 
         echo '
         <script>
-            alert("Data berhasil diupdate!");
-            window.location = "../public/profile.php";
+            window.location = "./profile.php";
         </script>';
         return;
 
@@ -94,7 +93,7 @@
     {
         if (!isset($_SESSION['user']))
         {
-            header("Location: http://localhost/public/index.php");
+            header("Location: index.php");
         }
         else
         {
@@ -104,14 +103,13 @@
 
     function getUserProfileWithID($id)
     {
-     
         $con = connect();
         $query1 = mysqli_query($con, "SELECT * FROM user_test WHERE `id` = '$id'") or die(mysqli_error($con));
         if (mysqli_num_rows($query1) == 0) {
             echo '
                 <script>
                     alert("Pengguna tidak ditemukan :<");
-                    window.location = "../public/homepage.php";
+                    window.location = "./homepage.php";
                 </script>';
             return;
         }
@@ -174,18 +172,18 @@
                 echo '
                     <div class="card">
                         <div class="card-body">
-                            <div class="followed">
+                            <div class="followed d-flex mb-3">
                                 <img src="'.getImagePath($id).'" width="50" height="50" class="me-3 rounded-circle" />
                                 <h3>'.getName($id).'</h3>
-                                <div class="text-right">
-                                    <form action="../public/profile.php" method="post">';
+                                <div class="ms-auto p-2">
+                                    <form action="./profile.php" method="post">';
                                     if (!$profileOrang)
                                     {
                                         echo '
                                             <input type="hidden" value="'.$data1['id_post'].'" name="postid" />
                                             <input type="hidden" value="'.$data1['post_content'].'" name="postcontent" />
-                                            <button id="updatePost" value="editPost" name="action" type="submit class="btn btn-success" style="font-size:24px"><i class="fa fa-edit"></i></button>
-                                            <button id="updatePost" value="deletePost" name="action" type="submit" class="btn btn-warning" style="font-size:24px"><i class="fa fa-trash"></i></button>
+                                            <button id="updatePost" value="editPost" name="action" type="submit" class="btn btn-success" style="font-size:100%"><i class="fa fa-edit"></i></button>
+                                            <button id="updatePost" value="deletePost" name="action" type="submit" class="btn btn-danger" style="font-size:100%"><i class="fa fa-trash"></i></button>
                                         ';
                                     }
                 echo '
@@ -196,6 +194,7 @@
                             '.$data1['post_content'].'
                         </div>
                     </div>
+		</div></div>
                 ';
 
                 $no++;
@@ -208,15 +207,37 @@
 
     function createPost($id, $content)
     {
+
+	if(!isset($content))
+	{
+	    echo '
+                    <script>
+                        window.location = "./profile.php";
+                    </script>
+                ';
+            return;
+	}
+
+	if(empty($content))
+        {
+            echo '
+                    <script>
+                        window.location = "./profile.php";
+                    </script>
+                ';
+            return;
+        }
+
         $con = connect();
         $query = mysqli_query($con,
             "INSERT INTO posts(post_content, id_user) VALUES ('$content', '$id')") or die(mysqli_error($con));
+
 
         if($query)
         {
             echo '
                     <script>
-                        window.location = "../public/profile.php";
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;
@@ -226,7 +247,7 @@
               echo '
                     <script>
                         alert("Post gagal dibuat");
-                        window.location = "../public/profile.php";
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;
@@ -237,6 +258,26 @@
     function updatePost($id, $content)
     {   
 
+	        if(!isset($content))
+        {
+            echo '
+                    <script>
+                        window.location = "./profile.php";
+                    </script>
+                ';
+            return;
+        }
+
+        if(empty($content))
+        {
+            echo '
+                    <script>
+                        window.location = "./profile.php";
+                    </script>
+                ';
+            return;
+        }
+
         $con = connect();
         $query = mysqli_query($con, "UPDATE posts SET post_content = '$content' WHERE id_post = '$id'") or die(mysqli_error($con));
 
@@ -244,7 +285,7 @@
         {
             echo '
                     <script>
-                        window.location = "../public/profile.php";
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;
@@ -253,8 +294,8 @@
         {
               echo '
                     <script>
-                        alert("Post gagal dibuat");
-                        window.location = "../public/profile.php";
+                        alert("Post gagal diupdate");
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;
@@ -271,7 +312,7 @@
         {
             echo '
                     <script>
-                        window.location = "../public/profile.php";
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;
@@ -280,8 +321,8 @@
         {
               echo '
                     <script>
-                        alert("Post gagal dibuat");
-                        window.location = "../public/profile.php";
+                        alert("Post gagal dihapus");
+                        window.location = "./profile.php";
                     </script>
                 ';
             return;

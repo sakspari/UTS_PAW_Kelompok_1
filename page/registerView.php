@@ -35,7 +35,7 @@ use PHPMailer\PHPMailer\Exception;
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar nav d-flex flex-sm-column justify-content-center ms-auto me-lg-5">
-                <form action="./welcome.php" method="post"
+                <form action="welcome.php" method="post"
                       class="d-flex flex-lg-row flex-sm-column flex-md-column">
                     <div class="mb-3">
                         <label for="exampleInputEmail" class="form-label fw-bold">Username</label>
@@ -71,7 +71,7 @@ use PHPMailer\PHPMailer\Exception;
                         <div>
                             <h1>Join and let it ConnectUs!</h1>
                         </div>
-                        <form action="../public/welcome.php" method="post" class="needs-validation">
+                        <form action="welcome.php" method="post" class="needs-validation">
                             <div class="mb-3 row">
                                 <label for="Name" class=" col-lg-3 form-label">Name</label>
                                 <input type="text" class="col-md col-sm-auto form-control" id="name" name="name" required>

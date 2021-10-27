@@ -5,9 +5,9 @@
     function connect()
     {
 
-        $hostname = "sg.1-cluster-ap.luckynetwork.id";
-        $username = "praktikum5";
-        $password = "@newS3cur3P44sw0rd0115";
+        $hostname = "localhost";
+        $username = "username";
+        $password = "password";
         $database = "uts_web";
 
         $con = mysqli_connect($hostname,$username,$password,$database);

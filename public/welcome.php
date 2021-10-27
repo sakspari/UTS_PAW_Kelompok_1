@@ -75,7 +75,7 @@
     }
     else if (isset($_SESSION['id']))
     {
-        header('Location: http://localhost/public/homepage.php');
+        header('Location: homepage.php');
     }
     else
     {

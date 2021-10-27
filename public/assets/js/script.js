@@ -27,5 +27,3 @@ function toggleSidenav() {
     iconSidenav.classList.remove("d-none");
   }
 }
-
-

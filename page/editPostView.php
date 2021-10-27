@@ -15,10 +15,9 @@
     <body class="h-100" style="background-color: #ffd77d">
     <div class="card shadow my-auto mx-sm-0 mx-md-5  mx-lg-5 mt-5" style="background-color: #ffc43d">
         <div class="card-body mx-auto w-75 h-25">
-            <form action="../public/profile.php" method="POST" class="mx-auto my-auto row">
+            <form action="profile.php" method="POST" class="mx-auto my-auto row">
                 <input type="hidden" name="postid" value="<?php echo $_POST['postid']; ?>" required>
-                <input type="text" name="postcontent" value="<?php echo $_POST['postcontent']; ?>" required/>
-
+		<textarea name="postcontent" id="postcontent" required><?php echo $_POST['postcontent']; ?></textarea>
                 <input type="submit" name="editPostSubmit" value="Edit Post" class="mx-auto mt-3 border-0 px-2 px-sm-2">
             </form>
         </div>

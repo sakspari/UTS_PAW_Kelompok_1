@@ -36,7 +36,7 @@
       <div class="navbar-nav ms-auto">
           <div class="p-1 bg-light rounded rounded-pill shadow-sm me-4">
             <div class="navbar-nav">
-              <form action="../public/homepage.php" method="post">
+              <form action="homepage.php" method="post">
                   <div class="input-group">
                       <input class="bg-light rounded form-control rounded-pill shadow-sm me-2" name="search" type="text" placeholder="Search people" aria-label="Search people" aria-describedby="button-search1" border-0 bg-light />
                       <div class="input-group-append">

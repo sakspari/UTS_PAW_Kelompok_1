@@ -8,9 +8,9 @@
 
     if (isset($_GET['id']))
     {
-        if ($_GET['id'] != "mine")
+		$id = isStringSafe($_GET['id'],$id);
+        if ($id != "mine" && $id != $_SESSION['id'])
         {
-            $id = isStringSafe($_GET['id'],$id);
 			$data = getUserProfileWithID($id);
 			$profileOrang = true;
         }
@@ -52,7 +52,7 @@
 	<!-- Navbar -->
 
 	<header class="navbar navbar-expand-lg navbar-dark bg-yellow fixed-top flex-md-nowrap shadow">
-	  <a class="ps-4 font-Akronim navbar-brand" href="http://localhost/public/index.php">ConnectUs</a>
+	  <a class="ps-4 font-Akronim navbar-brand" href="homepage.php">ConnectUs</a>
 
 	  <button class="navbar-toggler mt-4 position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -77,8 +77,8 @@
 				
                 <img src = <?php echo getImagePath($id);?> width="100%" height="100%" class="me-3 rounded-circle">
 				
-				<form action="../public/profile.php" method="POST">
-					<div class="row mb-3">
+				<form action="profile.php" method="POST">
+					<div class="row mb-3 pt-2">
 						<label for="name" class="col-sm-2 col-form-label" style="font-family: Arial, Helvetica, sans-serif">Name</label>
 						<div class="col-sm-10">
 							<?php
@@ -102,27 +102,39 @@
 						<label for="gender" class="col-sm-2 col-form-label" style="font-family: Arial, Helvetica, sans-serif">Gender</label>
 						<div class="col-sm-10">
 							<?php
-								if ($data['gender']) {
-									if (!$profileOrang)
-									{
-										echo '
-										<input type="text" class="form-control" id="gender" name="gender" value="Pria">';
-									}
-									else
+								if ($profileOrang)
+								{
+									if ($data['gender'])
 									{
 										echo '
 										<input type="text" class="form-control" id="gender" name="gender" value="Pria" disabled>';
-									}
-								} else {
-									if (!$profileOrang)
-									{
-										echo '
-										<input type="text" class="form-control" id="gender" name="gender" value="Wanita">';
 									}
 									else
 									{
 										echo '
 										<input type="text" class="form-control" id="gender" name="gender" value="Wanita" disabled>';
+									}
+								}
+								else
+								{
+									echo '
+										<select class="col-md col-sm-auto form-control form-select" id="gender" name="gender" aria-required="true">
+									';
+									if ($data['gender'])
+									{
+										echo '
+												<option selected value="Pria">Pria</option>
+                                				<option value="Wanita">Wanita</option>
+											</select>
+										';
+									}
+									else
+									{
+										echo '
+												<option value="Pria">Pria</option>
+                                				<option selected value="Wanita">Wanita</option>
+											</select>
+										';
 									}
 								}
 							?>
@@ -136,7 +148,7 @@
 								<div class="row mb-3">
 									<label for="borndate" class="col-sm-2 col-form-label"  style="font-family: Arial, Helvetica, sans-serif">Borndate</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="borndate" name="borndate" value="'.$data['dateborn'].'">
+										<input type="date" class="form-control" id="borndate" name="borndate" value="'.$data['dateborn'].'">
 									</div>
 								</div>
 		
@@ -162,17 +174,36 @@
 						{
 							echo '
 								<div class="text-center">
-								<button id="updateProfile" type="submit" class="btn btn-primary">Edit Profile</button>
+								<button id="updateProfile" name="updateProfile" type="submit" class="btn btn-primary">Edit Profile</button>
+								</div>
+							';
+							echo '
+								<p></p>
+								<div class="text-center">
+								<button id="logout" name="logout" type="submit" class="btn btn-danger">Logout</button>
 								</div>
 							';
 						}
 						else
 						{
-							echo '
-								<div class="text-center">
-								<button id="addFollower" type="submit" class="btn btn-primary">Add Follower</button>
-								</div>
-							';
+							if (!isFollowed($_SESSION['id'], $id))
+							{
+								echo '
+									<div class="text-center">
+									<input type="hidden" name="target_id" value="'.$id.'" required>
+									<button id="follow" name="follow" type="submit" class="btn btn-primary">Follow</button>
+									</div>
+								';
+							}
+							else
+							{
+								echo '
+									<div class="text-center">
+									<input type="hidden" name="target_id" value="'.$id.'" required>
+									<button id="unfollow" name="unfollow" type="submit" class="btn btn-danger">Unfollow</button>
+									</div>
+								';
+							}
 						}
 					?>
 					
@@ -196,12 +227,12 @@
 				<div class="card">
 					<div class="card-body">
 					<div class="followed">
-						<img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="50" height="50" class="me-3 rounded-circle" />
+						<img src="'.getImagePath($_SESSION['id']).'" width="50" height="50" class="me-3 rounded-circle" />
 						<h3>Create Post</h3>
 						
 					</div>
 
-					<form action="../public/profile.php" method="POST">
+					<form action="profile.php" method="POST">
 						<textarea class="form-control" name="content" rows="3"></textarea>
 
 						<div class="text-center">
